@@ -19,5 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ArticlesTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
         $this->call(LikesTableSeeder::class);
+        $this->call(ShotsTableSeeder::class);
+        $this->call(RoomsTableSeeder::class);
+        $this->call(ReservationsTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(RoleUserTableSeeder::class);
     }
 }
