@@ -15,9 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/object','SiteController@object')->name('object');
+Route::get('site/index','SiteController@index')->name('home');
+Route::get('/object/{id}','SiteController@object')->name('object');
 Route::get('/adminHome','SiteController@adminHome')->name('adminHome');
 Route::get('/roomSearch','SiteController@roomSearch')->name('roomSearch');
+Route::get(trans('routes.room'),'FrontendController@room')->name('room'); 
+Route::get(trans('routes.article'),'FrontendController@article')->name('article'); 
+Route::get(trans('routes.person'),'FrontendController@person')->name('person');
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){  
     

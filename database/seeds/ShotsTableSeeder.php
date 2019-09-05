@@ -16,8 +16,8 @@ class ShotsTableSeeder extends Seeder
         for ($i = 1; $i <= 100; $i++) {
 
             DB::table('shots')->insert([
-                'photoable_type' => 'App\TouristObject',
-                'photoable_id' => $faker->numberBetween(1, 10),
+                'shotable_type' => 'App\TouristObject',
+                'shotable_id' => $faker->numberBetween(1, 10),
                 'path' => $faker->imageUrl(800, 400, 'city')
             ]);
         }
@@ -25,8 +25,8 @@ class ShotsTableSeeder extends Seeder
         for ($i = 1; $i <= 200; $i++) {
 
             DB::table('shots')->insert([
-                'photoable_type' => 'App\Room',
-                'photoable_id' => $faker->numberBetween(1, 10),
+                'shotable_type' => 'App\Room',
+                'shotable_id' => $faker->numberBetween(1, 10),
                 'path' => $faker->imageUrl(800, 400, 'nightlife')
             ]);
         }
@@ -34,8 +34,8 @@ class ShotsTableSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
 
             DB::table('shots')->insert([
-                'photoable_type' => 'App\User',
-                'photoable_id' => $faker->unique()->numberBetween(1, 10),
+                'shotable_type' => 'App\User',
+                'shotable_id' => $faker->unique()->numberBetween(1, 10),
                 'path' => $faker->imageUrl(275, 150, 'people')
             ]);
         }

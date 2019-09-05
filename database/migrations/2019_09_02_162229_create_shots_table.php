@@ -15,8 +15,8 @@ class CreateShotsTable extends Migration
     {
         Schema::create('shots', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('photoable_type'); 
-            $table->bigInteger('photoable_id'); 
+            $table->string('shotable_type'); 
+            $table->bigInteger('shotable_id'); 
             $table->string('path');
             $table->timestamps();
         });

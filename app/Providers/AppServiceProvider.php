@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(\App\Hotelsplus\Interfaces\SiteRepositoryInterface::class,function()
+        {            
+            return new \App\Hotelsplus\Repositories\SiteRepository;
+        });
     }
 
     /**
@@ -23,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('site.*', function ($view) {
+            $view->with('placeholder', asset('images/placeholder.png')); 
+        });
     }
 }
