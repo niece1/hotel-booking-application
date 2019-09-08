@@ -9,7 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
+    <!-- Scripts -->    
+    <script type="text/javascript">var base_url = '{{ url('/') }}';</script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -21,6 +22,19 @@
 </head>
 <body>
     <div id="app">
+
+        <div class="top-bar">
+            <div class="top-bar-wrap">
+                <div class="top-bar-left"><p>Discount for the first booking</p></div>
+                    <div class="top-bar-right">
+                       
+                            <p><a href="#">Support</a><a href="#">FAQ</a></p>
+                            
+                       
+                    </div>
+            </div>
+        </div>
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -71,6 +85,42 @@
                 </div>
             </div>
         </nav>
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Enjoy the trip!</h1>
+                <p>A platform for tourists and owners of tourist facilities. Find the original place for the holidays!</p>
+                <p>Place your home on the site and let yourself be found by many tourists!</p>
+                <form action="{{ route('roomSearch') }}" method="POST" class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="city">City</label>
+                        <input name="city" type="text" class="form-control autocomplete" id="city" placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="day_in">Check in</label>
+                        <input name="check_in" type="text" class="form-control datepicker" id="check_in" placeholder="Check in">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="sr-only" for="day_out">Check out</label>
+                        <input name="check_out" type="text" class="form-control datepicker" id="check_out" placeholder="Check out">
+                    </div>
+                    <div class="form-group">
+                        <select name="room_size" class="form-control">
+                            <option>Room size</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Search</button>
+                          @csrf            
+                </form>
+
+            </div>
+        </div>
 
         <main class="py-4">
             @yield('content')

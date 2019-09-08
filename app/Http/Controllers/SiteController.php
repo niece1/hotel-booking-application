@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Hotelsplus\Interfaces\SiteRepositoryInterface;
+use App\Hotelsplus\Gateways\SiteGateway;
 
 class SiteController extends Controller
 {
-	public function __construct(SiteRepositoryInterface $siteRepository)
+	public function __construct(SiteRepositoryInterface $siteRepository, SiteGateway $siteGateway)
     {
         $this->siteRepository = $siteRepository;
+        $this->siteGateway = $siteGateway;
     }
     
     public function index()
@@ -46,4 +48,29 @@ class SiteController extends Controller
     {
         return view('site.roomsearch');
     }
+
+    public function roomsearch(Request $request )
+    {
+        if($city = $this->siteGateway->getSearchResults($request))
+        {
+            dd($city);
+            return view('site.roomsearch',['city'=>$city]);
+        }
+        else 
+        {
+            if (!$request->ajax())
+            return redirect('/')->with('norooms', __('No offers were found matching the criteria'));
+        }
+        
+    }
+
+    public function searchCities(Request $request)
+    {
+
+        $results = $this->siteGateway->searchCities($request);
+
+        return response()->json($results);
+    }
+
+    
 }

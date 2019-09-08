@@ -6,3 +6,27 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//Top bar styles
+.top-bar {
+	color: #fff;
+	background: #000;
+	width: 100%;
+	height: 60px;
+	.top-bar-wrap {
+		width: 80%;
+		margin: auto;
+		.top-bar-left {
+			float: left;
+		}
+		.top-bar-right {
+			float: right;
+			a {
+				color: #fff;
+				text-decoration: none;
+				padding: 0 5px;
+			}
+			
+		}
+	}
+}

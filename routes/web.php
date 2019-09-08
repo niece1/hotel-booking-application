@@ -21,7 +21,10 @@ Route::get('/adminHome','SiteController@adminHome')->name('adminHome');
 Route::get('/roomSearch','SiteController@roomSearch')->name('roomSearch');
 Route::get(trans('routes.room'),'FrontendController@room')->name('room'); 
 Route::get(trans('routes.article'),'FrontendController@article')->name('article'); 
-Route::get(trans('routes.person'),'FrontendController@person')->name('person');
+Route::get(trans('routes.person'),'SiteController@person')->name('person');
+Route::post(trans('routes.roomsearch'),'SiteController@roomsearch')->name('roomSearch');
+
+Route::get('/searchCities', 'SiteController@searchCities');
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){  
     
