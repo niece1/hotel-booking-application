@@ -23,20 +23,19 @@
                 @foreach($chunked_shots as $shot) <!-- Lecture 16 -->
 
                     <div class="col-md-4">
-                        <img class="img-responsive" src="{{ $shot->path ?? $placeholder }}" alt=""> <!-- Lecture 16 src -->
+                        <img class="img-responsive" src="{{ $shot->path ?? $placeholder }}" alt=""> 
                     </div>
                     
-                @endforeach <!-- Lecture 16 -->
-
+                @endforeach 
                 </div>
 
-            @endforeach <!-- Lecture 16 -->
+            @endforeach 
 
         </div>
         <div class="tab-pane fade" id="people">
 
             <ul class="list-inline">
-                @foreach( $object->users as $user) <!-- Lecture 16 -->
+                @foreach( $object->users as $user) 
                     <li><a href="{{ route('person') }}"><img title="{{ $user->FullName  }}" class="media-object img-responsive" width="50" height="50" src="{{ $user->shots->first()->path ?? $placeholder  }}" alt="..."> </a></li>
 
                 @endforeach <!-- Lecture 16 -->
@@ -45,7 +44,7 @@
 
         </div>
         <div class="tab-pane fade" id="adress">
-            <p>{{ $object->address->street }} {{ $object->address->number }} <!-- Lecture 16 --></p>
+            <p>{{ $object->address->street }} {{ $object->address->number }} </p>
         </div>
     </div>
 
@@ -53,11 +52,11 @@
 
         <h2 class="text-center">Object rooms</h2>
 
-        @foreach($object->rooms->chunk(4) as $chunked_rooms) <!-- Lecture 16 -->
+        @foreach($object->rooms->chunk(4) as $chunked_rooms) 
 
             <div class="row">
 
-                @foreach($chunked_rooms as $room) <!-- Lecture 16 -->
+                @foreach($chunked_rooms as $room) 
 
                     <div class="col-md-3 col-sm-6">
 
@@ -66,17 +65,15 @@
                             <div class="caption">
                                 <h3>Nr {{ $room->room_number}} <!-- Lecture 16 --></h3>
                                 <p>{{ str_limit($room->description,70) }} <!-- Lecture 16 --> </p>
-                                <p><a href="{{ route('room') }}" class="btn btn-primary" role="button">Details</a><a href="{{ route('room') }}#reservation" class="btn btn-success pull-right" role="button">Reservation</a></p>
+                                <p><a href="{{ route('room',['id'=>$room->id]) }}" class="btn btn-primary" role="button">Details</a><a href="{{ route('room',['id'=>$room->id]) }}#reservation" class="btn btn-success pull-right" role="button">Reservation</a></p>
                             </div>
                         </div>
                     </div>
 
-                @endforeach <!-- Lecture 16 -->
-
-
+                @endforeach 
             </div>
 
-        @endforeach <!-- Lecture 16 -->
+        @endforeach 
 
     </section>
 
@@ -85,7 +82,7 @@
         @foreach( $object->comments as $comment ) <!-- Lecture 16 -->
             <div class="media">
                 <div class="media-left media-top">
-                    <a title="{{ $comment->user->FullName /* Lecture 16 */ }}" href="{{ route('person') }}">
+                    <a title="{{ $comment->user->FullName  }}" href="{{ route('person') }}">
                         <img class="media-object" width="50" height="50" src="{{ $comment->user->shots->first()->path ?? $placeholder  }}" alt="...">
                     </a>
                 </div>

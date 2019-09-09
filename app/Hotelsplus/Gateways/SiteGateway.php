@@ -34,17 +34,53 @@ class SiteGateway {
 
         if( $request->input('city') != null)
         {
+            $dayin = date('Y-m-d', strtotime($request->input('check_in'))); 
+            $dayout = date('Y-m-d', strtotime($request->input('check_out')));
 
             $result = $this->siteRepository->getSearchResults($request->input('city'));
 
             if($result)
             {
 
-                // to do: filter results based on check in and check out etc.
+                foreach ($result->rooms as $k=>$room)
+                {
+                   if( (int) $request->input('room_size') > 0 )
+                   {
+                        if($room->room_size != $request->input('room_size'))
+                        {
+                            $result->rooms->forget($k);
+                        }
+                   }
 
-                $request->flash(); // inputs for session for one request
+                    foreach($room->reservations as $reservation)
+                    {
 
-                return $result; // filtered result
+                        if( $dayin >= $reservation->day_in
+                            &&  $dayin <= $reservation->day_out
+                        )
+                        {
+                            $result->rooms->forget($k);
+                        }
+                        elseif( $dayout >= $reservation->day_in
+                            &&  $dayout <= $reservation->day_out
+                        )
+                        {
+                            $result->rooms->forget($k);
+                        }
+                        elseif( $dayin <= $reservation->day_in
+                            &&  $dayout >= $reservation->day_out
+                        )
+                        {
+                            $result->rooms->forget($k);
+                        }
+
+                    }
+
+                }
+
+                if(count($result->rooms)> 0)
+                return $result;  // filtered result
+                else return false;
 
             }
 

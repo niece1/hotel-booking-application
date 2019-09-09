@@ -39,14 +39,10 @@ class SiteController extends Controller
         return view('site.person');
     }
    
-    public function room()
+    public function room($id)
     {
-        return view('site.room');
-    }
- 
-    public function roomsearch()
-    {
-        return view('site.roomsearch');
+        $room = $this->siteRepository->getRoom($id); 
+        return view('site.room',['room'=>$room]);
     }
 
     public function roomsearch(Request $request )
@@ -62,6 +58,16 @@ class SiteController extends Controller
             return redirect('/')->with('norooms', __('No offers were found matching the criteria'));
         }
         
+    }
+
+    public function ajaxGetRoomReservations($id)
+    {
+        
+        $reservations = $this->siteRepository->getReservationsByRoomId($id);
+        
+        return response()->json([
+            'reservations'=>$reservations
+        ]);
     }
 
     public function searchCities(Request $request)

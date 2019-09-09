@@ -9,9 +9,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="stylesheet" href="https://bootswatch.com/3/readable/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <!-- Scripts -->    
-    <script type="text/javascript">var base_url = '{{ url('/') }}';</script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>var base_url = '{{ url('/') }}';</script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -94,25 +97,30 @@
                 <form action="{{ route('roomSearch') }}" method="POST" class="form-inline">
                     <div class="form-group">
                         <label class="sr-only" for="city">City</label>
-                        <input name="city" type="text" class="form-control autocomplete" id="city" placeholder="City">
+                        <input name="city" type="text" value="{{ old('city') }}" class="form-control autocomplete" id="city" placeholder="City">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="day_in">Check in</label>
-                        <input name="check_in" type="text" class="form-control datepicker" id="check_in" placeholder="Check in">
+                        <input name="check_in" type="text" value="{{ old('check_in') }}" class="form-control datepicker" id="check_in" placeholder="Check in">
                     </div>
 
                     <div class="form-group">
                         <label class="sr-only" for="day_out">Check out</label>
-                        <input name="check_out" type="text" class="form-control datepicker" id="check_out" placeholder="Check out">
+                        <input name="check_out" type="text"  value="{{ old('check_out') }}" class="form-control datepicker" id="check_out" placeholder="Check out">
                     </div>
                     <div class="form-group">
                         <select name="room_size" class="form-control">
                             <option>Room size</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            
+                            <!-- Lecture 19 -->
+                            @for($i=1;$i<=5;$i++)
+                                @if( old('room_size') == $i )
+                                <option selected value="{{$i}}">{{$i}}</option>
+                                @else
+                                <option value="{{$i}}">{{$i}}</option>
+                                @endif
+                            @endfor
+                            
                         </select>
                     </div>
                     <button type="submit" class="btn btn-warning">Search</button>
@@ -124,7 +132,10 @@
 
         <main class="py-4">
             @yield('content')
-        </main>
+        </main>        
     </div>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    @stack('scripts')
 </body>
 </html>
