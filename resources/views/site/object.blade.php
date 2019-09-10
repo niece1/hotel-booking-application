@@ -143,7 +143,7 @@
                 <p><b> {{ $article->user->FullName }} <!-- Lecture 16 --></b>
                     <i>{{ $article->created_at }} <!-- Lecture 16 --></i>
                 </p>
-                <p>{{ str_limit($article->content,250) }} <!-- Lecture 16 --> </p> <a href="{{ route('article') }}">More</a>
+                <p>{{ str_limit($article->content,250) }} <!-- Lecture 16 --> </p> <a href="{{ route('article',['id'=>$article->id]) }}">More</a>
             </div>
 
         @endforeach <!-- Lecture 16 -->

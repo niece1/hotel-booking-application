@@ -20,7 +20,7 @@ Route::get('/object/{id}','SiteController@object')->name('object');
 Route::get('/adminHome','SiteController@adminHome')->name('adminHome');
 //Route::post('/roomSearch','SiteController@roomsearch')->name('roomSearch');
 Route::get(trans('routes.room').'/{id}','SiteController@room')->name('room'); 
-Route::get(trans('routes.article'),'SiteController@article')->name('article'); 
+Route::get(trans('routes.article').'/{id}','SiteController@article')->name('article'); 
 Route::get(trans('routes.person'),'SiteController@person')->name('person');
 Route::post(trans('routes.roomsearch'),'SiteController@roomsearch')->name('roomSearch');
 

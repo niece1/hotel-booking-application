@@ -21,9 +21,10 @@ class SiteController extends Controller
         return view('site.index',['objects'=>$objects]);
     }
 
-    public function article()
+    public function article($id)
     {
-        return view('site.article');
+    	$article = $this->siteRepository->getArticle($id);
+        return view('site.article',compact('article'));
     }
    
     public function object($id)

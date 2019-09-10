@@ -6,6 +6,7 @@ use App\TouristObject;
 use App\City;
 use App\Room;
 use App\Reservation;
+use App\Article;
 use App\Hotelsplus\Interfaces\SiteRepositoryInterface;
 
 class SiteRepository implements SiteRepositoryInterface
@@ -45,6 +46,11 @@ class SiteRepository implements SiteRepositoryInterface
     public function getReservationsByRoomId( $room_id )
     {
         return  Reservation::where('room_id',$room_id)->get(); 
-    }   
+    }
+
+    public function getArticle($id)
+    {
+        return  Article::with(['object.shots','comments'])->find($id);
+    }    
   
 }

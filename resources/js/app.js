@@ -4,4 +4,21 @@
  * application frontend using useful Laravel and JavaScript libraries.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
+$(function () {
+    $(".datepicker").datepicker();
+});
+
+
+$(function () {
+    $(".autocomplete").autocomplete({
+        source: base_url + "/searchCities", /* Lecture 17 */
+        minLength: 2,
+        select: function (event, ui) {
+            
+//            console.log(ui.item.value);
+        }
+
+
+    });
+});
