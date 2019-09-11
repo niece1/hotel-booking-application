@@ -40,7 +40,20 @@
         <hr>
     @endforeach 
 
-    <a href="#" class="btn btn-primary btn-xs">Like this article</a><br><br>
+    @auth
+    
+        @if( $article->isLiked() )
+       <a href="{{ route('unlike',['id'=>$article->id,'type'=>'App\Article']) }}" class="btn btn-primary btn-xs top-buffer">Unlike this article</a>
+        @else
+       <a href="{{ route('like',['id'=>$article->id,'type'=>'App\Article']) }}" class="btn btn-primary btn-xs top-buffer">Like this article</a>
+        @endif 
+    
+    @else
+    
+    <p><a href="{{ route('login') }}">Login to like this article</a></p>
+  
+    @endauth
+    <br><br>
 
     <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
         Add comment
@@ -49,7 +62,7 @@
         <div class="well">
 
 
-            <form method="POST" class="form-horizontal">
+            <form method="POST" action="{{ route('addComment',['article_id'=>$article->id, 'App\Article']) }}" class="form-horizontal">
                 <fieldset>
 
                     <div class="form-group">
@@ -66,6 +79,7 @@
                         </div>
                     </div>
                 </fieldset>
+                @csrf
             </form>
 
         </div>

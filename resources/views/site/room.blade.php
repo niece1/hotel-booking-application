@@ -44,7 +44,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <form method="POST">
+                <form method="POST" action="{{ route('makeReservation',['room_id'=>$room->id,'city_id'=>$room->object->city->id]) }}">
                     <div class="form-group">
                         <label for="checkin">Check in</label>
                         <input required name="checkin" type="text" class="form-control datepicker" id="checkin" placeholder="">
@@ -54,7 +54,8 @@
                         <input required name="checkout" type="text" class="form-control datepicker" id="checkout" placeholder="">
                     </div>
                     <button type="submit" class="btn btn-primary">Book</button> 
-                    <p class="text-danger">There are no vacancies</p>
+                    <p class="text-danger">{{ Session::get('reservationMsg') }}</p>
+                    @csrf
                 </form>
             </div><br>
             <div class="col-md-6">

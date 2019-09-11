@@ -10,6 +10,8 @@ class SiteController extends Controller
 {
 	public function __construct(SiteRepositoryInterface $siteRepository, SiteGateway $siteGateway)
     {
+    	$this->middleware('auth')->only(['makeReservation','addComment','like','unlike']);
+
         $this->siteRepository = $siteRepository;
         $this->siteGateway = $siteGateway;
     }
@@ -35,9 +37,10 @@ class SiteController extends Controller
         return view('site.object', ['object'=>$object]);
     }
   
-    public function person()
+    public function person($id)
     {
-        return view('site.person');
+        $user = $this->siteRepository->getPerson($id);
+        return view('site.person', ['user'=>$user]);
     }
    
     public function room($id)
@@ -77,6 +80,54 @@ class SiteController extends Controller
         $results = $this->siteGateway->searchCities($request);
 
         return response()->json($results);
+    }
+
+    public function like($likeable_id, $type, Request $request)
+    {
+        $this->siteRepository->like($likeable_id, $type, $request);
+
+        return redirect()->back();
+    }
+
+    public function unlike($likeable_id, $type, Request $request)
+    {
+        $this->siteRepository->unlike($likeable_id, $type, $request);
+        
+        return redirect()->back();
+    }
+
+    public function addComment($commentable_id, $type, Request $request)
+    {
+        $this->siteGateway->addComment($commentable_id, $type, $request);
+        
+        return redirect()->back();
+    }
+
+    public function makeReservation($room_id, $city_id, Request $request)
+    {
+        
+        $avaiable = $this->siteGateway->checkAvaiableReservations($room_id, $request);
+        
+        if(!$avaiable)
+        {
+            if (!$request->ajax())
+            {
+                $request->session()->flash('reservationMsg', __('There are no vacancies'));
+                return redirect()->route('room',['id'=>$room_id,'#reservation']); 
+            }
+            
+            return response()->json(['reservation'=>false]);
+        }
+        else
+        {     
+            $reservation = $this->siteGateway->makeReservation($room_id, $city_id, $request);
+            
+            if (!$request->ajax())
+            return redirect()->route('adminHome'); 
+            else
+            return response()->json(['reservation'=>$reservation]);
+        }
+ 
     }
 
     

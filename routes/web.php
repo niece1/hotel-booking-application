@@ -21,11 +21,18 @@ Route::get('/adminHome','SiteController@adminHome')->name('adminHome');
 //Route::post('/roomSearch','SiteController@roomsearch')->name('roomSearch');
 Route::get(trans('routes.room').'/{id}','SiteController@room')->name('room'); 
 Route::get(trans('routes.article').'/{id}','SiteController@article')->name('article'); 
-Route::get(trans('routes.person'),'SiteController@person')->name('person');
+Route::get(trans('routes.person').'/{id}','SiteController@person')->name('person');
 Route::post(trans('routes.roomsearch'),'SiteController@roomsearch')->name('roomSearch');
 
 Route::get('/searchCities', 'SiteController@searchCities');
 Route::get('/ajaxGetRoomReservations/{id}', 'SiteController@ajaxGetRoomReservations');
+
+Route::get('/like/{likeable_id}/{type}', 'SiteController@like')->name('like');
+Route::get('/unlike/{likeable_id}/{type}', 'SiteController@unlike')->name('unlike');
+
+Route::post('/addComment/{commentable_id}/{type}', 'SiteController@addComment')->name('addComment');
+
+Route::post('/makeReservation/{room_id}/{city_id}', 'SiteController@makeReservation')->name('makeReservation');
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){  
     
