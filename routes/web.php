@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::get('site/index','SiteController@index')->name('home');
 Route::get('/object/{id}','SiteController@object')->name('object');
@@ -39,10 +39,26 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
   Route::get('/','BackendController@index')->name('adminHome');  
   Route::get(trans('routes.myobjects'),'BackendController@myobjects')->name('myObjects'); 
   Route::get(trans('routes.saveobject'),'BackendController@saveObject')->name('saveObject');  
-  Route::get(trans('routes.profile'),'BackendController@profile')->name('profile');  
+  Route::match(['GET','POST'],trans('routes.profile'),'BackendController@profile')->name('profile');
+  Route::get('/deleteShot/{id}', 'BackendController@deleteShot')->name('deleteShot');  
   Route::get(trans('routes.saveroom'),'BackendController@saveRoom')->name('saveRoom'); 
-  Route::get('/cities','BackendController@cities')->name('cities.index');  
-    
+  Route::get('/cities','BackendController@cities')->name('cities.index');
+  Route::match(['GET','POST'],trans('routes.saveobject').'/{id?}','BackendController@saveObject')->name('saveObject');
+
+  Route::get('/deleteArticle/{id}', 'BackendController@deleteArticle')->name('deleteArticle'); /* Lecture 44 */
+  Route::post('/saveArticle/{id?}', 'BackendController@saveArticle')->name('saveArticle');
+
+  Route::get('/ajaxGetReservationData', 'BackendController@ajaxGetReservationData');
+
+  Route::get('/confirmReservation/{id}', 'BackendController@confirmReservation')->name('confirmReservation'); 
+  Route::get('/deleteReservation/{id}', 'BackendController@deleteReservation')->name('deleteReservation');  
+
+  Route::get(trans('routes.deleteobject').'/{id}', 'BackendController@deleteObject')->name('deleteObject');
+
+  Route::match(['GET','POST'],trans('routes.saveroom').'/{id?}', 'BackendController@saveRoom')->name('saveRoom'); /* Lecture 47 */  
+  Route::get(trans('routes.deleteroom').'/{id}', 'BackendController@deleteRoom')->name('deleteRoom');
+  
+  Route::resource('cities', 'CityController');  
     
 });
 

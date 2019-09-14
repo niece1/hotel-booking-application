@@ -9,6 +9,8 @@ class Article extends Model
 {
     use Hotelsplus\Presenters\ArticlePresenter;
 
+    protected $guarded = [];
+
     public function user()
     {
         return $this->belongsTo('App\User');

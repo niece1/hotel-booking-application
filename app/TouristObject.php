@@ -55,4 +55,9 @@ class TouristObject extends Model
     {
         return $this->users()->where('user_id', Auth::user()->id)->exists();
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

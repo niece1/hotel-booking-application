@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,11 +65,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+       
+        $user =  User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
+    
+        if(!Role::where('name','owner')->exists())
+        {
+            Role::create(['name'=>'owner']);
+            Role::create(['name'=>'tourist']);
+            Role::create(['name'=>'admin']);
+        }
+       
+        if($data['owner'] ?? 0) $user->roles()->attach( Role::where('name','owner')->first()->id );
+        else
+        $user->roles()->attach( Role::where('name','tourist')->first()->id ); 
+        
+        
+        return $user; /* Lecture 36 */
     }
 }

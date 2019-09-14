@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\App;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
         {            
             return new \App\Hotelsplus\Repositories\SiteRepository;
         });
+
+        $this->app->bind(\App\Hotelsplus\Interfaces\BackendRepositoryInterface::class,function()
+        {            
+            return new \App\Hotelsplus\Repositories\BackendRepository;
+        });
     }
 
     /**
@@ -30,5 +36,20 @@ class AppServiceProvider extends ServiceProvider
         View::composer('site.*', function ($view) {
             $view->with('placeholder', asset('images/placeholder.png')); 
         });
+
+        if (App::environment('local'))
+        {
+            
+           View::composer('*', function ($view) {
+            $view->with('novalidate', 'novalidate');
+            });
+  
+        }
+        else
+        {
+            View::composer('*', function ($view) {
+            $view->with('novalidate', null);
+            });
+        }
     }
 }

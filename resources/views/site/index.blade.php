@@ -19,7 +19,7 @@
                 <div class="col-md-3 col-sm-6">
 
                     <div class="thumbnail">
-                        <img class="img-responsive" src="{{ $object->shots->first()->path ?? null }}" alt="..."> 
+                        <img class="img-responsive" src="{{ $object->shots->first()->path ?? $placeholder }}" alt="..."> 
                         <div class="caption">
                             <h3>{{ $object->name }}   <small>{{ $object->city->name  }}</small> </h3>
                             <p>{{ str_limit($object->description,100) }}</p>

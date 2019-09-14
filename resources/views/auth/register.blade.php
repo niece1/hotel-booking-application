@@ -75,6 +75,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="col-md-6 offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="owner" value="1">
+                                        Register as a owner
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
