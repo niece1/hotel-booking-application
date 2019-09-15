@@ -11,6 +11,7 @@ use App\Shot;
 use App\Address;
 use App\Article;
 use App\Room;
+use App\Notification;
 
 class BackendRepository implements BackendRepositoryInterface  
 {   
@@ -310,6 +311,30 @@ class BackendRepository implements BackendRepositoryInterface
     public function deleteRoom(Room $room)
     {
         return $room->delete();
+    }
+
+    public function setReadNotifications($request)
+    {
+       return Notification::where('id', $request->input('id'))
+                        ->update(['status' => 1]);
+    }
+
+    public function getUserNotifications($id)
+    {
+        return Notification::where('user_id', $id)->where('shown', 0)->get();
+    }
+    
+    
+    /* Lecture 52 */
+    public function setShownNotifications($request)
+    {
+        return Notification::whereIn('id', $request->input('idsOfNotShownNotifications'))
+                        ->update(['shown' => 1]);
+    }
+
+    public function getNotifications()
+    {
+        return Notification::where('user_id', Auth::user()->id )->where('status',0)->get(); // for mobile
     }
   
 }

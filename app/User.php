@@ -88,4 +88,9 @@ class User extends Authenticatable
         return false;
  
     }
+
+    public function unotifications()
+    {
+        return $this->hasMany('App\Notification');
+    }
 }

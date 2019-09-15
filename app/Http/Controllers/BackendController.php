@@ -168,7 +168,9 @@ class BackendController extends Controller
 
         $this->backendRepository->deleteReservation($reservation); /* Lecture 35 */
         
-        $this->flashMsg ('success', __('Reservation has been deleted'));  /* Lecture 35 */
+        $this->flashMsg ('success', __('Reservation has been deleted'));
+
+        event( new ReservationConfirmedEvent($reservation) );
 
         if (!\Request::ajax()) /* Lecture 35 */
         return redirect()->back();
@@ -225,5 +227,17 @@ class BackendController extends Controller
                
         return redirect()->back();
     
+    }
+
+    public function getNotifications()
+    {
+        return response()->json( $this->backendRepository->getNotifications() ); // for mobile
+    }
+    
+    
+    /* Lecture 53 */
+    public function setReadNotifications(Request $request)
+    {
+        return  $this->backendRepository->setReadNotifications($request); // for mobile
     }
 }

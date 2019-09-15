@@ -59,6 +59,14 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
   Route::get(trans('routes.deleteroom').'/{id}', 'BackendController@deleteRoom')->name('deleteRoom');
   
   Route::resource('cities', 'CityController');  
+
+  Route::get('/ajaxSetReadNotification', 'BackendController@ajaxSetReadNotification');
+  Route::get('/ajaxGetNotShownNotifications', 'BackendController@ajaxGetNotShownNotifications');
+  Route::get('/ajaxSetShownNotifications', 'BackendController@ajaxSetShownNotifications');
+
+  //for json mobile
+  Route::get('/getNotifications', 'BackendController@getNotifications'); /* Lecture 53 */
+  Route::post('/setReadNotifications', 'BackendController@setReadNotifications');
     
 });
 

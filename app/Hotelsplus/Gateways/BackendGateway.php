@@ -158,4 +158,39 @@ class BackendGateway
             
     }
 
+    public function checkNotificationsStatus($request)
+    {
+        
+        set_time_limit(0);
+
+        $memcache = new \Memcached();
+
+        $memcache->addServer('localhost', 11211) or die("Could not connect");
+
+        $currentmodif = (int) $memcache->get('userid_' . $request->user()->id . '_notification_timestamp');
+
+        $lastmodif = $request->input('timestamp') ?? 0;
+
+        $start = microtime(true);
+
+        $response = array();
+
+
+        while ($currentmodif <= $lastmodif)
+        {
+
+            if ( (microtime(true) - $start) > 10)
+            {
+                return json_encode($response);
+            }
+
+
+            sleep(0.1);
+            $currentmodif = (int) $memcache->get('userid_' . $request->user()->id . '_notification_timestamp');
+        }
+        
+        
+        return $currentmodif;
+    }
+
 }

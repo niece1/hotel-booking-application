@@ -24,5 +24,27 @@ trait Ajax {
         ]);
     }
 
+    public function ajaxSetReadNotification(Request $request)
+    {
+        return  $this->backendRepository->setReadNotifications($request);
+    }
+
+    public function ajaxGetNotShownNotifications(Request $request)
+    {
+
+        $currentmodif = $this->backendRepository->checkNotificationsStatus($request);   
+
+        // executed if while loop ends
+        $response['notifications'] = $this->backendRepository->getUserNotifications($request->user()->id);;
+        $response['timestamp'] = $currentmodif;
+
+        return json_encode($response);
+    }
+
+    public function ajaxSetShownNotifications(Request $request)
+    {
+        return $this->backendRepository->setShownNotifications($request);
+    }
+
     
 }

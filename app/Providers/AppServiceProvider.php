@@ -33,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer('backend.*', '\App\Hotelsplus\ViewComposers\BackendComposer');
+
         View::composer('site.*', function ($view) {
             $view->with('placeholder', asset('images/placeholder.png')); 
         });

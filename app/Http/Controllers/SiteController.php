@@ -121,6 +121,8 @@ class SiteController extends Controller
         else
         {     
             $reservation = $this->siteGateway->makeReservation($room_id, $city_id, $request);
+
+            event( new OrderPlacedEvent($reservation) );
             
             if (!$request->ajax())
             return redirect()->route('adminHome'); 
