@@ -8,6 +8,8 @@ use App\Hotelsplus\Interfaces\BackendRepositoryInterface;
 use App\Hotelsplus\Gateways\BackendGateway; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Events\ReservationConfirmedEvent;
+use Illuminate\Support\Facades\Cache;
 
 class BackendController extends Controller
 {
@@ -91,6 +93,8 @@ class BackendController extends Controller
 
             $this->backendGateway->saveObject($id, $request);
 
+            Cache::flush();
+
             if($id)
             return redirect()->back();
             else
@@ -118,6 +122,8 @@ class BackendController extends Controller
             $this->authorize('checkOwner', $this->backendRepository->getObject($request->input('object_id')));   
 
             $this->backendGateway->saveRoom($id, $request);
+
+            Cache::flush();
             
             if($id)
             return redirect()->back();
@@ -138,7 +144,9 @@ class BackendController extends Controller
         
         $this->authorize('checkOwner', $room); /* Lecture 48 */
 
-        $this->backendRepository->deleteRoom($room); /* Lecture 48 */
+        $this->backendRepository->deleteRoom($room); 
+
+        Cache::flush();
 
         return redirect()->back(); /* Lecture 48 */
     }
@@ -185,7 +193,9 @@ class BackendController extends Controller
         
         $path = $this->backendRepository->deleteShot($shot); /* Lecture 40 */
         
-        Storage::disk('public')->delete($path); /* Lecture 40 */
+        Storage::disk('public')->delete($path); 
+
+        Cache::flush();
 
         return redirect()->back();
     }
@@ -196,7 +206,9 @@ class BackendController extends Controller
         
         $this->authorize('checkOwner', $article); /* Lecture 45 */
         
-        $this->backendRepository->deleteArticle($article); /* Lecture 45 */
+        $this->backendRepository->deleteArticle($article);
+
+        Cache::flush();
 
         return redirect()->back(); /* Lecture 45 */ 
     }
@@ -214,7 +226,9 @@ class BackendController extends Controller
 
         $this->authorize('checkOwner', $this->backendRepository->getObject($object_id)); /* Lecture 45 */
 
-        $this->backendGateway->saveArticle($object_id,$request); /* Lecture 45 */
+        $this->backendGateway->saveArticle($object_id,$request); 
+
+        Cache::flush();
 
         return redirect()->back(); /* Lecture 45 */
     }
@@ -224,6 +238,8 @@ class BackendController extends Controller
         $this->authorize('checkOwner', $this->backendRepository->getObject($id));
         
         $this->backendRepository->deleteObject($id);
+
+        Cache::flush();
                
         return redirect()->back();
     

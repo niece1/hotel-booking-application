@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Hotelsplus\Interfaces\SiteRepositoryInterface;
 use App\Hotelsplus\Gateways\SiteGateway;
+use Illuminate\Support\Facades\Cache;
 
 class SiteController extends Controller
 {
@@ -86,12 +87,16 @@ class SiteController extends Controller
     {
         $this->siteRepository->like($likeable_id, $type, $request);
 
+        Cache::flush();
+
         return redirect()->back();
     }
 
     public function unlike($likeable_id, $type, Request $request)
     {
         $this->siteRepository->unlike($likeable_id, $type, $request);
+
+        Cache::flush();
         
         return redirect()->back();
     }
@@ -99,6 +104,8 @@ class SiteController extends Controller
     public function addComment($commentable_id, $type, Request $request)
     {
         $this->siteGateway->addComment($commentable_id, $type, $request);
+
+        Cache::flush();
         
         return redirect()->back();
     }

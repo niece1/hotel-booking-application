@@ -15,10 +15,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\App\Hotelsplus\Interfaces\SiteRepositoryInterface::class,function()
-        {            
-            return new \App\Hotelsplus\Repositories\SiteRepository;
-        });
+        if (App::environment('local'))
+        {
+            
+            /* Lecture 13 */
+            $this->app->bind(\App\Hotelsplus\Interfaces\SiteRepositoryInterface::class,function()
+            {            
+                return new \App\Hotelsplus\Repositories\SiteRepository;
+            });
+  
+        }
+        else
+        {
+            
+            $this->app->bind(\App\Hotelsplus\Interfaces\SiteRepositoryInterface::class,function()
+            {            
+                return new \App\Hotelsplus\Repositories\CachedSiteRepository;
+            });  
+
+        }
 
         $this->app->bind(\App\Hotelsplus\Interfaces\BackendRepositoryInterface::class,function()
         {            
