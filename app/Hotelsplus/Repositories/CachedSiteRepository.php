@@ -4,6 +4,7 @@ namespace App\Hotelsplus\Repositories; /* Lecture 55 */
 
 use App\Hotelsplus\Interfaces\SiteRepositoryInterface;
 use Illuminate\Support\Facades\Cache; /* Lecture 55 */
+use Illuminate\Support\Facades\Redis;
 
 
 /* Lecture 55 */

@@ -15,7 +15,7 @@
     return view('welcome');
 });*/
 
-Route::get('site/index','SiteController@index')->name('home');
+Route::get('/','SiteController@index')->name('home');
 Route::get('/object/{id}','SiteController@object')->name('object');
 Route::get('/adminHome','SiteController@adminHome')->name('adminHome');
 //Route::post('/roomSearch','SiteController@roomsearch')->name('roomSearch');
@@ -72,4 +72,4 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

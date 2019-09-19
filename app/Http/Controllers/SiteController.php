@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Hotelsplus\Interfaces\SiteRepositoryInterface;
 use App\Hotelsplus\Gateways\SiteGateway;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 class SiteController extends Controller
 {
@@ -54,7 +55,7 @@ class SiteController extends Controller
     {
         if($city = $this->siteGateway->getSearchResults($request))
         {
-            dd($city);
+           // dd($city);
             return view('site.roomsearch',['city'=>$city]);
         }
         else 

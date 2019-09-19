@@ -10,7 +10,7 @@
 
     <ul class="nav nav-tabs">
         <li class="active"><a href="#gallery" data-toggle="tab" aria-expanded="true">Image gallery</a></li>
-        <li><a href="#people" data-toggle="tab" aria-expanded="true">Object is liked <span class="badge">{{ $object->users->count() }} </span></a></li>
+        <li><a href="#people" data-toggle="tab" aria-expanded="true">Object is liked by<span class="badge">{{ $object->users->count() }} </span></a></li>
         <li><a href="#adress" data-toggle="tab" aria-expanded="false">Address</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
@@ -23,7 +23,7 @@
                 @foreach($chunked_shots as $shot) 
 
                     <div class="col-md-4">
-                        <img class="img-responsive" src="{{ $shot->path ?? $placeholder }}" alt=""> 
+                        <img class="img-responsive" src="{{ $shot->path ?? $placeholder }}" alt="objects"> 
                     </div>
                     
                 @endforeach 

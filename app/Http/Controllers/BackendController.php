@@ -75,7 +75,7 @@ class BackendController extends Controller
                 }
                 
             }
-
+             Cache::flush();
 
             return redirect()->back();
         }
