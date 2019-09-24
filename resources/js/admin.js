@@ -105,6 +105,7 @@ var App = {
         } else
         {
             $('.hidden_' + App.calendar_id + " .reservation_data_confirm_reservation").attr('href', response.confirmResLink);
+            $('.hidden_' + App.calendar_id + " .reservation_data_confirm_reservation").removeAttr('disabled'); /* Lecture 62 */
         }
 
         
