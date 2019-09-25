@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
+   
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -12,79 +12,65 @@
     <link rel="stylesheet" href="https://bootswatch.com/3/readable/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <!-- Fonts -->
+    
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Be+Vietnam|Open+Sans|Roboto&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Scripts -->    
+       
     <script>var base_url = '{{ url('/') }}';</script>
 </head>
 <body>
-    <div id="app">
-
+   
         <div class="top-bar">
             <div class="top-bar-wrap">
-                <div class="top-bar-left"><p>Discount for the first booking</p></div>
+                <div class="top-bar-left"><p>hotelsplus@gmail.com</p></div>
                     <div class="top-bar-right">
                        
-                            <p><a href="#">Support</a><a href="#">FAQ</a></p>
+                            <p><a href="#">Search</a><a href="#">FAQ</a></p>
                             
                        
                     </div>
             </div>
         </div>
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <nav class="navigation">
+            
+                <div class="navigation-wrapper">
+                    <div class="navigation-wrapper-left">
+                    <a class="logo" href="{{ route('home') }}">HotelsPlus</a>
+                </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                <div class="navigation-wrapper-right">
+                    @auth 
+                    <ul class="authentified">
+                        <li><p class="text">Logged in as:</p></li>
+                        <li><p class="text">{{ Auth::user()->name }}</p></li> 
+                        <li><a href="{{ route('adminHome') }}">admin</a></li>
+                        
+                        
+                        <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                        Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        </li>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
                     </ul>
+                    @endauth 
+                    @guest 
+                    <ul class="authentification">
+                        <li><a href="{{ route('login') }}">Login</a></li> 
+                        <li><a href="{{ route('register') }}">Sign in</a></li> 
+                    </ul>
+                    @endguest 
                 </div>
-            </div>
+          </div>
         </nav>
 
         <div class="jumbotron">
@@ -110,7 +96,7 @@
                         <select name="room_size" class="form-control">
                             <option>Room size</option>
                             
-                            <!-- Lecture 19 -->
+                            
                             @for($i=1;$i<=5;$i++)
                                 @if( old('room_size') == $i )
                                 <option selected value="{{$i}}">{{$i}}</option>
@@ -130,14 +116,44 @@
 
         <main class="py-4">
             @yield('content')
-        </main>        
-    </div>
+        </main>
+
+        <div class="container-fluid">
+
+            <div class="row mobile-apps">
+
+                <div class="col-md-6 col-xs-12">
+                    
+                    <img src="{{ asset('images/mobile-app.png') }}" alt="" class="img-responsive center-block">
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                    <h1 class="text-center">Download mobile app.</h1>
+                    
+                    <a href="#"><img class="img-responsive center-block" src="{{ asset('images/google.png') }}" alt=""></a><br><br>
+                    <a href="#"><img class="img-responsive center-block" src="{{ asset('images/apple.png') }}" alt=""></a><br><br>
+                    <a href="#"><img class="img-responsive center-block" src="{{ asset('images/windows.png') }}" alt=""></a>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <footer>
+
+                <p class="text-center">&copy; 2017 HotelsPlus</p>
+
+            </footer>
+
+        </div>        
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/app.js') }}"></script> <!-- Lecture 5 -->
-        @stack('scripts') <!-- Lecture 20 -->
+        <script src="{{ asset('js/app.js') }}"></script> 
+        @stack('scripts') 
 </body>
 </html>
