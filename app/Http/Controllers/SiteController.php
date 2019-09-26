@@ -60,7 +60,7 @@ class SiteController extends Controller
         }
         else 
         {
-            if (!$request->ajax())
+            if (!$request->ajax()) //need for mobile app where no redirects exist
             return redirect('/')->with('norooms', __('No offers were found matching the criteria'));
         }
         

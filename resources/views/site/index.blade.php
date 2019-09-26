@@ -1,14 +1,14 @@
 @extends('layouts.app') 
 
 @section('content') 
-<div class="container-fluid places">
+<section class="objects-list">
 
     @if (session('norooms'))
     <p class="text-center red bolded">
         {{ session('norooms') }}
     </p>
     @endif
-    <h1 class="text-center">Interesting places</h1>
+    <h1 class="text-center">Explore our hotels</h1>
 
     @foreach($objects->chunk(4) as $chunk) 
 
@@ -35,5 +35,5 @@
 
     @endforeach 
     {{ $objects->links() }}
-</div>
+</section>
 @endsection
