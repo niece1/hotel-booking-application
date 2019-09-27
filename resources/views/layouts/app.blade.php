@@ -76,8 +76,8 @@
 </nav>
 
 <section class="search" data-type="background">
-    <div class="search-area">
-        <h1>Enjoy the trip!</h1>
+    
+        <h1>Book your weekend</h1>
         <p>A platform for tourists and owners of tourist facilities. Find the original place for the holidays!</p>
         <p>Place your home on the site and let yourself be found by many tourists!</p>
         <form action="{{ route('roomSearch') }}" method="POST" class="form-inline">
@@ -109,18 +109,18 @@
 
                 </select>
             </div>
-            <button type="submit" class="btn btn-warning">Search</button>
+            <button type="submit" class="btn btn-danger">Search</button>
             @csrf            
         </form>
 
-    </div>
+   
 </section>
 
-<main class="py-4">
-    @yield('content')
-</main>
 
-<div class="container-fluid">
+    @yield('content')
+
+
+<div class="pre-footer">
 
     <div class="row mobile-apps">
 

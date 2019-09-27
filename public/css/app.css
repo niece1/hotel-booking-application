@@ -1,16 +1,13 @@
 body {
-  padding-bottom: 20px;
   font-family: "Open Sans", sans-serif;
 }
 
 nav.navigation {
   width: 100%;
-  height: 100px;
   background-color: #fff;
 }
 nav.navigation .navigation-wrapper {
   width: 75%;
-  height: 100px;
   margin: auto;
   display: grid;
   grid-template-columns: auto auto;
@@ -18,7 +15,7 @@ nav.navigation .navigation-wrapper {
 }
 nav.navigation .navigation-wrapper .navigation-wrapper-left {
   font-size: 25px;
-  line-height: 100px;
+  line-height: 90px;
 }
 nav.navigation .navigation-wrapper .navigation-wrapper-left a.logo {
   font-family: "Be Vietnam", sans-serif;
@@ -37,38 +34,45 @@ nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification
 nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification li a, nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li a {
   margin: 0 0 0 10px;
   text-decoration: none;
-  line-height: 100px;
+  line-height: 90px;
 }
 
 /*Search area*/
 .search {
   width: 100%;
-  height: 430px;
-  background-image: url(../images/header.png);
+  min-height: 430px;
+  background-image: url(../images/search-area.jpg);
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  color: #000;
-}
-.search .search-area {
-  width: 75%;
-  margin: auto;
   text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+.search h1 {
+  margin: 90px 0 10px 0;
+}
+.search p {
+  color: #ee2852;
+  font-weight: 600;
+}
+.search form {
+  margin: 20px 0 0 0;
+}
+
+.objects-list {
+  width: 100%;
+}
+.objects-list .objects-list-wrapper {
+  width: 90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 50px;
 }
 
 .table td, th {
   text-align: left;
-}
-
-.jumbotron .form-inline {
-  position: relative;
-  top: 30px;
-  margin: 15px 5px !important;
-}
-
-.navbar-default {
-  background-color: #ffffff !important;
-  border-color: #1995dc;
 }
 
 .places h1 {
@@ -87,10 +91,6 @@ nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification
   margin-bottom: 50px;
 }
 
-section {
-  margin-top: 100px;
-}
-
 .articles-list {
   background-color: #f4f4f4;
   padding: 10px;
@@ -98,7 +98,7 @@ section {
 }
 
 .top-buffer {
-  margin-top: 30px;
+  margin-top: 0;
 }
 
 .blue {
