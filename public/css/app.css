@@ -8,6 +8,7 @@ nav.navigation {
 }
 nav.navigation .navigation-wrapper {
   width: 75%;
+  height: 90px;
   margin: auto;
   display: grid;
   grid-template-columns: auto auto;
@@ -15,34 +16,63 @@ nav.navigation .navigation-wrapper {
 }
 nav.navigation .navigation-wrapper .navigation-wrapper-left {
   font-size: 25px;
-  line-height: 90px;
 }
 nav.navigation .navigation-wrapper .navigation-wrapper-left a.logo {
   font-family: "Be Vietnam", sans-serif;
   color: #ee2852;
   text-decoration: none;
+  line-height: 90px;
 }
 nav.navigation .navigation-wrapper .navigation-wrapper-right {
   display: inline-block;
 }
-nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification, nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified {
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification,
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified {
   list-style: none;
 }
-nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification li, nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li {
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification li,
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li {
   display: inline-block;
 }
-nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification li a, nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li a {
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification li a,
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li a {
   margin: 0 0 0 10px;
   text-decoration: none;
+  line-height: 60px;
+}
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification li p,
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li p {
   line-height: 90px;
+}
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification li p:hover,
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li p:hover {
+  color: #ee2852;
+  transition: all 300ms ease-in-out;
+}
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification li p i,
+nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li p i {
+  font-size: 15px;
+  padding: 0 0 0 3px;
+  position: absolute;
+  top: 35px;
+}
+
+/*Article page*/
+.article {
+  width: 100%;
+  height: auto;
+}
+.article .article-wrapper {
+  width: 75%;
+  margin: 80px auto;
 }
 
 /*Search area*/
 .search {
   width: 100%;
   min-height: 430px;
-  background-image: url(../images/search-area.jpg);
-  background-position: center;
+  background-image: url(../images/hotel.jpg);
+  background-position: bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
   text-align: center;
@@ -60,34 +90,82 @@ nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification
   margin: 20px 0 0 0;
 }
 
+/*Object page*/
+.object {
+  width: 100%;
+  height: auto;
+}
+.object .object-wrapper {
+  width: 75%;
+  margin: 80px auto;
+}
+
 .objects-list {
   width: 100%;
+  margin: 80px 0;
 }
 .objects-list .objects-list-wrapper {
   width: 90%;
   margin: auto;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 23% 23% 23% 23%;
   grid-gap: 50px;
 }
+@media only screen and (max-width: 1100px) {
+  .objects-list .objects-list-wrapper {
+    grid-template-columns: auto auto;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .objects-list .objects-list-wrapper {
+    grid-template-columns: auto;
+  }
+}
 
-.table td, th {
+.pre-footer {
+  width: 100%;
+  background-color: #000;
+  overflow: hidden;
+}
+.pre-footer h4 {
+  color: #ee2852;
+  padding: 0 0 15px 0;
+}
+.pre-footer p {
+  color: #9c9c9c;
+}
+.pre-footer .pre-footer-wrapper {
+  width: 75%;
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: 30% 25% 25%;
+  grid-column-gap: 70px;
+}
+@media only screen and (max-width: 900px) {
+  .pre-footer .pre-footer-wrapper {
+    grid-template-columns: 100%;
+  }
+}
+.pre-footer .pre-footer-wrapper .account a {
+  color: #fff;
+  text-decoration: none;
+}
+.pre-footer .pre-footer-wrapper .account a:hover {
+  color: #ee2852;
+  transition: all 300ms ease-in-out;
+}
+
+footer p {
+  line-height: 60px;
+}
+
+.table td,
+th {
   text-align: left;
 }
 
 .places h1 {
   margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.mobile-apps {
-  background-color: #D9534F;
-  padding: 50px;
-  margin-top: 100px;
-}
-
-.mobile-apps h1 {
-  color: #ffffff;
   margin-bottom: 50px;
 }
 
@@ -102,23 +180,23 @@ nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification
 }
 
 .blue {
-  color: #337AB7;
+  color: #337ab7;
 }
 
 .green {
-  color: #5CB85C;
+  color: #5cb85c;
 }
 
 .orange {
-  color: #F0AD4E;
+  color: #f0ad4e;
 }
 
 .red {
-  color: #D9534F;
+  color: #d9534f;
 }
 
 .white {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .bolded {
@@ -160,11 +238,11 @@ nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentification
   }
 }
 .reservationconfirmed a {
-  background-color: #5CB85C !important;
+  background-color: #5cb85c !important;
 }
 
 .reservationnotconfirmed a {
-  background-color: #D9534F !important;
+  background-color: #d9534f !important;
 }
 
 .button__badge {

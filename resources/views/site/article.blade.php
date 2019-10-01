@@ -1,32 +1,32 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
-@section('content') 
-<div class="container">
-
-    <h1>Article <small>about: <a href="{{ route('object',['id'=>$article->object->id]) }}">{{ $article->object->name  }}</a> object</small></h1>
-    <p>{{ $article->content  }}</p>
-
-
-    <a class="btn btn-primary top-buffer" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Article is liked <span class="badge">{{ $article->users->count()  }}</span>
-    </a>
-    <div class="collapse" id="collapseExample">
-        <div class="well">
-
-            <ul class="list-inline">
-                @foreach( $article->users as $user ) 
-                    <li><a href="{{ route('person',['id'=>$user->id]) }}"><img title="{{ $user->FullName  }}" class="media-object img-responsive" width="50" height="50" src="{{ $user->shots->first()->path ?? $placeholder  }}" alt="..."> </a></li>
-
-                @endforeach 
-            </ul>
+@section('content')
+<div class="article">
+    <div class="article-wrapper">
+        <h1>Новости <small> <a href="{{ route('object',['id'=>$article->object->id]) }}">{{ $article->object->name  }}</a></small></h1>
+        <p>{{ $article->content  }}</p>
 
 
+        <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Лайки <span class="badge">{{ $article->users->count()  }}</span>
+        </a>
+        <div class="collapse" id="collapseExample">
+            <div class="well" style="margin-top: 20px;">
+
+                <ul class="list-inline">
+                    @foreach( $article->users as $user )
+                    <li><a href="{{ route('person',['id'=>$user->id]) }}"><img title="{{ $user->FullName  }}" class="img-responsive" width="50" height="50" src="{{ $user->shots->first()->path ?? $placeholder  }}" alt="..."> </a></li>
+
+                    @endforeach
+                </ul>
+
+
+            </div>
         </div>
-    </div>
 
-    <h3>Comments</h3>
+        <h3 style="color: #ee2852;">Комментарии</h3>
 
-    @foreach( $article->comments as $comment ) 
+        @foreach( $article->comments as $comment )
         <div class="media">
             <div class="media-left media-top">
                 <a href="{{ route('person',['id'=>$comment->user->id]) }}">
@@ -34,57 +34,58 @@
                 </a>
             </div>
             <div class="media-body">
-               {{ $comment->content }}
+                {{ $comment->content }}
             </div>
         </div>
         <hr>
-    @endforeach 
+        @endforeach
 
-    @auth
-    
+        @auth
+
         @if( $article->isLiked() )
-       <a href="{{ route('unlike',['id'=>$article->id,'type'=>'App\Article']) }}" class="btn btn-primary btn-xs top-buffer">Unlike this article</a>
+        <a href="{{ route('unlike',['id'=>$article->id,'type'=>'App\Article']) }}" class="btn btn-primary btn-xs top-buffer">Unlike</a>
         @else
-       <a href="{{ route('like',['id'=>$article->id,'type'=>'App\Article']) }}" class="btn btn-primary btn-xs top-buffer">Like this article</a>
-        @endif 
-    
-    @else
-    
-    <p><a href="{{ route('login') }}">Login to like this article</a></p>
-  
-    @endauth
-    <br><br>
+        <a href="{{ route('like',['id'=>$article->id,'type'=>'App\Article']) }}" class="btn btn-primary btn-xs top-buffer">Like</a>
+        @endif
+        <br><br>
+        <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+            Добавить комментарий
+        </a>
+        @else
 
-    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-        Add comment
-    </a>
-    <div class="collapse" id="collapseExample2">
-        <div class="well">
+        <p><a href="{{ route('login') }}">Залогиньтесь, чтобы поставить лайк или комментарий</a></p>
+
+        @endauth
 
 
-            <form method="POST" action="{{ route('addComment',['article_id'=>$article->id, 'App\Article']) }}" class="form-horizontal">
-                <fieldset>
 
-                    <div class="form-group">
-                        <label for="textArea" class="col-lg-2 control-label">Comment</label>
-                        <div class="col-lg-10">
-                            <textarea required name="content" class="form-control" rows="3" id="textArea"></textarea>
-                            <span class="help-block">Add a comment about this article.</span>
+        <div class="collapse" id="collapseExample2">
+            <div class="well mt-5" style="margin-top: 20px;">
+
+
+                <form method="POST" action="{{ route('addComment',['article_id'=>$article->id, 'App\Article']) }}" class="form-horizontal">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">Комментарий</label>
+                            <div class="col-lg-10">
+                                <textarea required name="content" class="form-control" rows="3" id="textArea"></textarea>
+                                <span class="help-block">Добавить комментарий</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Send</button>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </div>
                         </div>
-                    </div>
-                </fieldset>
-                @csrf
-            </form>
+                    </fieldset>
+                    @csrf
+                </form>
 
+            </div>
         </div>
+
     </div>
-
-
 </div>
 @endsection

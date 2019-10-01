@@ -1,85 +1,85 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
-@section('content') 
-<div class="container-fluid places">
+@section('content')
+<div class="object">
+    <div class="object-wrapper">
+        <h1 class="text-center">{{ $object->name }} object <small>{{ $object->city->name }} </small></h1>
 
-    <h1 class="text-center">{{ $object->name }}  object  <small>{{ $object->city->name }} </small></h1>
-
-    <p>{{ $object->description }} </p>
+        <p style="padding: 0 0 10px 0;">{{ $object->description }} </p>
 
 
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#gallery" data-toggle="tab" aria-expanded="true">Image gallery</a></li>
-        <li><a href="#people" data-toggle="tab" aria-expanded="true">Object is liked by<span class="badge">{{ $object->users->count() }} </span></a></li>
-        <li><a href="#adress" data-toggle="tab" aria-expanded="false">Address</a></li>
-    </ul>
-    <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="gallery">
+        <ul class="nav nav-tabs ">
+            <li class="active"><a href="#gallery" data-toggle="tab" aria-expanded="true">Галлерея</a></li>
+            <li><a href="#people" data-toggle="tab" aria-expanded="true">Лайки<span class="badge" style="margin-left: 3px;">{{ $object->users->count() }} </span></a></li>
+            <li><a href="#adress" data-toggle="tab" aria-expanded="false">Aдрес</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in " id="gallery">
 
-            @foreach($object->shots->chunk(3) as $chunked_shots) 
+                @foreach($object->shots->chunk(3) as $chunked_shots)
 
-                <div class="row top-buffer">
-                
-                @foreach($chunked_shots as $shot) 
+                <div class="row">
 
-                    <div class="col-md-4">
-                        <img class="img-responsive" src="{{ $shot->path ?? $placeholder }}" alt="objects"> 
+                    @foreach($chunked_shots as $shot)
+
+                    <div class="col-md-4 ">
+                        <img class="img-responsive" src="{{ $shot->path ?? $placeholder }}" alt="objects">
                     </div>
-                    
-                @endforeach 
+
+                    @endforeach
                 </div>
 
-            @endforeach 
+                @endforeach
 
-        </div>
-        <div class="tab-pane fade" id="people">
+            </div>
+            <div class="tab-pane fade" id="people">
 
-            <ul class="list-inline">
-                @foreach( $object->users as $user) 
+                <ul class="list-inline">
+                    @foreach( $object->users as $user)
                     <li><a href="{{ route('person',['id'=>$user->id]) }}"><img title="{{ $user->FullName  }}" class="media-object img-responsive" width="50" height="50" src="{{ $user->shots->first()->path ?? $placeholder  }}" alt="..."> </a></li>
 
-                @endforeach 
-            </ul>
+                    @endforeach
+                </ul>
 
 
+            </div>
+            <div class="tab-pane fade" id="adress">
+                <p style="margin-top: 10px">{{ $object->address->street }} {{ $object->address->number }} </p>
+            </div>
         </div>
-        <div class="tab-pane fade" id="adress">
-            <p>{{ $object->address->street }} {{ $object->address->number }} </p>
-        </div>
-    </div>
 
-    <section>
+        <section>
 
-        <h2 class="text-center">Object rooms</h2>
+            <h2 class="text-center">Номера отеля</h2>
 
-        @foreach($object->rooms->chunk(4) as $chunked_rooms) 
+            @foreach($object->rooms->chunk(4) as $chunked_rooms)
 
             <div class="row">
 
-                @foreach($chunked_rooms as $room) 
+                @foreach($chunked_rooms as $room)
 
-                    <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6">
 
-                        <div class="thumbnail">
-                            <img class="img-responsive img-circle" src="{{ $room->shots->first()->path ?? $placeholder  }}" alt="...">
-                            <div class="caption">
-                                <h3>Nr {{ $room->room_number}} </h3>
-                                <p>{{ str_limit($room->description,70) }}  </p>
-                                <p><a href="{{ route('room',['id'=>$room->id]) }}" class="btn btn-primary" role="button">Details</a><a href="{{ route('room',['id'=>$room->id]) }}#reservation" class="btn btn-success pull-right" role="button">Reservation</a></p>
-                            </div>
+                    <div class="thumbnail">
+                        <img class="img-responsive img-circle" src="{{ $room->shots->first()->path ?? $placeholder  }}" alt="...">
+                        <div class="caption">
+                            <h3>Nr {{ $room->room_number}} </h3>
+                            <p>{{ str_limit($room->description,70) }} </p>
+                            <p><a href="{{ route('room',['id'=>$room->id]) }}" class="btn btn-primary" role="button">Details</a><a href="{{ route('room',['id'=>$room->id]) }}#reservation" class="btn btn-success pull-right" role="button">Reservation</a></p>
                         </div>
                     </div>
+                </div>
 
-                @endforeach 
+                @endforeach
             </div>
 
-        @endforeach 
+            @endforeach
 
-    </section>
+        </section>
 
-    <section>
-        <h2 class="green">Object comments</h2>
-        @foreach( $object->comments as $comment ) 
+        <section>
+            <h3 style="color: #ee2852">Комментарии и рейтинг объекта</h3>
+            @foreach( $object->comments as $comment )
             <div class="media">
                 <div class="media-left media-top">
                     <a title="{{ $comment->user->FullName  }}" href="{{ route('person',['id'=>$comment->user->id]) }}">
@@ -87,86 +87,87 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    {{ $comment->content }} 
-                    {!! $comment->rating !!} 
+                    {{ $comment->content }}
+                    {!! $comment->rating !!}
                 </div>
             </div>
             <hr>
-        @endforeach 
-    </section>
+            @endforeach
+        </section>
 
-    @auth
-    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Add comment
-    </a>
-    @else
-    <p><a href="{{ route('login') }}">Login to add a comment</a></p>
-    @endauth
+        @auth
+        <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Добавить комментарий
+        </a>
+        @else
+        <p><a href="{{ route('login') }}">Залогиньтесь, чтобы добавить комментарий</a></p>
+        @endauth
 
-    <div class="collapse" id="collapseExample">
-        <div class="well">
+        <div class="collapse" id="collapseExample">
+            <div class="well" style="margin-top: 20px;">
 
 
-            <form method="POST" action="{{ route('addComment',['object_id'=>$object->id, 'App\TouristObject']) }}" class="form-horizontal">
-                <fieldset>
-                    <div class="form-group">
-                        <label for="textArea" class="col-lg-2 control-label">Comment</label>
-                        <div class="col-lg-10">
-                            <textarea required name="content" class="form-control" rows="3" id="textArea"></textarea>
-                            <span class="help-block">Add a comment about this object.</span>
+                <form method="POST" action="{{ route('addComment',['object_id'=>$object->id, 'App\TouristObject']) }}" class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">Комментарий</label>
+                            <div class="col-lg-10">
+                                <textarea required name="content" class="form-control" rows="3" id="textArea"></textarea>
+                                <span class="help-block">Добавьте комментарий</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="select" class="col-lg-2 control-label">Rating</label>
-                        <div class="col-lg-10">
-                            <select name="rating" class="form-control" id="select">
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Рейтинг</label>
+                            <div class="col-lg-10">
+                                <select name="rating" class="form-control" id="select">
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Send</button>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </div>
                         </div>
-                    </div>
-                </fieldset>
-                @csrf
-            </form>
+                    </fieldset>
+                    @csrf
+                </form>
 
+            </div>
         </div>
-    </div>
 
-    <section>
-        <h2 class="red">Articles about the object / area</h2>
-        @foreach($object->articles as $article) 
+        <section>
+            <h3 style="color: #ee2852">Новости отеля</h3>
+            @foreach($object->articles as $article)
             <div class="articles-list">
-                <h4 class="top-buffer">{{ $article->title }} </h4>
+                <h3>{{ $article->title }} </h3>
                 <p><b> {{ $article->user->FullName }} </b>
                     <i>{{ $article->created_at }} </i>
                 </p>
-                <p>{{ str_limit($article->content,250) }}  </p> <a href="{{ route('article',['id'=>$article->id]) }}">More</a>
+                <p>{{ str_limit($article->content,250) }} </p> <a href="{{ route('article',['id'=>$article->id]) }}">Читать</a>
             </div>
 
-        @endforeach 
-    </section>
+            @endforeach
+        </section>
 
-    @auth
-    
+        @auth
+
         @if( $object->isLiked() )
-       <a href="{{ route('unlike',['id'=>$object->id,'type'=>'App\TouristObject']) }}" class="btn btn-primary btn-xs top-buffer">Unlike this object</a>
+        <a href="{{ route('unlike',['id'=>$object->id,'type'=>'App\TouristObject']) }}" class="btn btn-danger btn-xs top-buffer">Unlike</a>
         @else
-       <a href="{{ route('like',['id'=>$object->id,'type'=>'App\TouristObject']) }}" class="btn btn-primary btn-xs top-buffer">Like this object</a>
-        @endif 
-    
-    @else
-    
-    <p><a href="{{ route('login') }}">Login to like this object</a></p>
-  
-    @endauth
+        <a href="{{ route('like',['id'=>$object->id,'type'=>'App\TouristObject']) }}" class="btn btn-success btn-xs top-buffer">Like</a>
+        @endif
+
+        @else
+
+        <p><a href="{{ route('login') }}">Залогиньтесь, чтобы лайкнуть статью</a></p>
+
+        @endauth
+    </div>
 </div>
 @endsection
