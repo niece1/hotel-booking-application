@@ -1,31 +1,29 @@
-@extends('layouts.backend') <!-- Lecture 37 -->
+@extends('layouts.backend')
 
-<!-- Lecture 37 -->
 @section('content')
-<h1>Cities <small><a class="btn btn-success" href="{{ route('cities.create') /* Lecture 38 */ }}" data-type="button"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>New city </a></small></h1>
+<h2>Города <small><a class="btn btn-primary" href="{{ route('cities.create') }}" data-type="button"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Добавить </a></small></h2>
 
 <div class="table-responsive">
     <table class="table table-hover table-striped">
         <tr>
-            <th>City name</th>
-            <th>Edit / Delete</th>
+            <th>Город</th>
+            <th>Редактировать / Удалить</th>
         </tr>
-        @foreach( $cities as $city ) <!-- Lecture 38 -->
-            <tr>
-                <td>{{ $city->name /* Lecture 38 */  }}</td>
-                <td>
-                    <a href="{{ route('cities.edit',['id'=>$city->id]) /* Lecture 38 */ }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                    
-            <!-- Lecture 38 -->    
-            <form style="display: inline;" method="POST" action="{{ route('cities.destroy',['id'=>$city->id]) }}">
-<button onclick="return confirm('Are you sure?');" class="btn btn-primary btn-xs" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-{{ method_field('DELETE') }}
-{{ csrf_field() }}
-           </form>
- 
-                </td>
-            </tr>
-        @endforeach <!-- Lecture 38 -->
+        @foreach( $cities as $city )
+        <tr>
+            <td>{{ $city->name }}</td>
+            <td>
+                <a href="{{ route('cities.edit',['id'=>$city->id])  }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+
+                <form style="display: inline;" method="POST" action="{{ route('cities.destroy',['id'=>$city->id]) }}">
+                    <button onclick="return confirm('Вы уверены?');" class="btn btn-primary btn-xs" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                    {{ method_field('DELETE') }}
+                    @csrf
+                </form>
+
+            </td>
+        </tr>
+        @endforeach
     </table>
 </div>
 

@@ -29,22 +29,22 @@ class OrderPlacedEventListener
     {
         Notification::create([
 
-           'user_id'=>$id = $event->reservation->room->object->user_id,
-           'content'=>__('Reservation has been made for room :number in :object object. Day in :dayin , day out :dayout',[
-               'number'=>$event->reservation->room->room_number,
-               'object'=>$event->reservation->room->object->name,
-               'dayin'=>$event->reservation->day_in,
-               'dayout'=>$event->reservation->day_out
-                   ]),
-           'status'=>0,
+            'user_id' => $id = $event->reservation->room->object->user_id,
+            'content' => __('Reservation has been made for room :number in :object object. Day in :dayin , day out :dayout', [
+                'number' => $event->reservation->room->room_number,
+                'object' => $event->reservation->room->object->name,
+                'dayin' => $event->reservation->day_in,
+                'dayout' => $event->reservation->day_out
+            ]),
+            'status' => 0,
 
-           ]);
-        
-        
-        $memcache = new \Memcached(); /* Lecture 54 */
+        ]);
 
-        $memcache->addServer('localhost', 11211) or die("Could not connect"); /* Lecture 54 */
 
-        $memcache->set('userid_' . $id. '_notification_timestamp',time());
+        //   $memcache = new \Memcached(); /* Lecture 54 */
+
+        //   $memcache->addServer('localhost', 11211) or die("Could not connect"); /* Lecture 54 */
+
+        //  $memcache->set('userid_' . $id. '_notification_timestamp',time());
     }
 }

@@ -1,25 +1,24 @@
-@extends('layouts.backend') <!-- Lecture 5 -->
+@extends('layouts.backend') 
 
-@section('content') <!-- Lecture 5 -->
-<h2 class="sub-header">Booking calendar</h2>
+@section('content') 
+<h2 style="margin-top: 80px;">Календарь резервирования</h2>
 
-@foreach( $objects as $o=>$object ) <!-- Lecture 29 -->
+@foreach( $objects as $o=>$object ) 
 
-@php ( $o++ ) <!-- Lecture 29 -->
-    <h3 class="red">{{ $object->name /* Lecture 29 */ }} object</h3>
+@php ( $o++ ) 
+    <h3 class="red">{{ $object->name  }} object</h3>
 
 
-    @foreach( $object->rooms as $r=>$room ) <!-- Lecture 29 -->
-    
-    <!-- Lecture 30 -->
+    @foreach( $object->rooms as $r=>$room ) 
+  
     @push('scripts')
     <script>
 
-    var eventDates{{ $o.$r }} = {}; /* Lecture 32 $o.$r */
-    var datesConfirmed{{ $o.$r }} = []; /* Lecture 32 */
-    var datesnotConfirmed{{ $o.$r }} = [];/* Lecture 32 */
+    var eventDates{{ $o.$r }} = {}; 
+    var datesConfirmed{{ $o.$r }} = []; 
+    var datesnotConfirmed{{ $o.$r }} = [];
     
-    /* Lecture 32 */
+   
     @foreach($room->reservations as $reservation)
 
         @if ($reservation->status)
@@ -30,38 +29,38 @@
 
     @endforeach
     
-    datesConfirmed{{$o.$r}} = [].concat.apply([], datesConfirmed{{$o.$r}}); /* Lecture 32 */
-    datesnotConfirmed{{$o.$r}} = [].concat.apply([], datesnotConfirmed{{$o.$r}}); /* Lecture 32 */
+    datesConfirmed{{$o.$r}} = [].concat.apply([], datesConfirmed{{$o.$r}}); 
+    datesnotConfirmed{{$o.$r}} = [].concat.apply([], datesnotConfirmed{{$o.$r}}); 
 
 
-    for (var i = 0; i < datesConfirmed{{ $o.$r }}.length; i++) /* Lecture 32 $o.$r */
+    for (var i = 0; i < datesConfirmed{{ $o.$r }}.length; i++) 
     {
-        eventDates{{ $o.$r }}[ datesConfirmed{{ $o.$r }}[i] ] = 'confirmed'; /* Lecture 32 $o.$r */
+        eventDates{{ $o.$r }}[ datesConfirmed{{ $o.$r }}[i] ] = 'confirmed'; 
     }
 
-    var tmp{{ $o.$r }} = {}; /* Lecture 32 $o.$r */
-    for (var i = 0; i < datesnotConfirmed{{ $o.$r }}.length; i++) /* Lecture 32 $o.$r */
+    var tmp{{ $o.$r }} = {}; 
+    for (var i = 0; i < datesnotConfirmed{{ $o.$r }}.length; i++) 
     {
-        tmp{{ $o.$r }}[ datesnotConfirmed{{ $o.$r }}[i] ] = 'notconfirmed'; /* Lecture 32 $o.$r */
+        tmp{{ $o.$r }}[ datesnotConfirmed{{ $o.$r }}[i] ] = 'notconfirmed'; 
     }
 
 
-    Object.assign(eventDates{{ $o.$r }}, tmp{{ $o.$r }});  /* Lecture 32 $o.$r */
+    Object.assign(eventDates{{ $o.$r }}, tmp{{ $o.$r }});  
 
 
     $(function () {
-        $(".reservation_calendar" + {{ $o.$r }}/* Lecture 32 */).datepicker({
-            onSelect: function (date/* Lecture 32 data->date */) {
+        $(".reservation_calendar" + {{ $o.$r }}).datepicker({
+            onSelect: function (date) {
 
-                $('.hidden_' + {{ $o.$r }}).hide(); /* Lecture 32 $o.$r */
-                $('.loader_' + {{ $o.$r }}).show(); /* Lecture 32 $o.$r */
+                $('.hidden_' + {{ $o.$r }}).hide(); 
+                $('.loader_' + {{ $o.$r }}).show(); 
                 
-                App.GetReservationData({{ $room->id }}, {{ $o.$r }}, date ); /* Lecture 32 */
+                App.GetReservationData({{ $room->id }}, {{ $o.$r }}, date ); 
 
             },
             beforeShowDay: function (date)
             {
-                var tmp = eventDates{{ $o.$r }}[ $.datepicker.formatDate('mm/dd/yy', date)]; /* Lecture 32 $o.$r */
+                var tmp = eventDates{{ $o.$r }}[ $.datepicker.formatDate('mm/dd/yy', date)]; 
     //            console.log(tmp);
                 if (tmp)
                 {
@@ -82,15 +81,15 @@
     </script>
     @endpush
 
-        <h4 class="blue"> Room {{ $room->room_number /* Lecture 29 */ }}</h4>
+        <h4 class="blue"> Номер {{ $room->room_number  }}</h4>
 
-        <div class="row top-buffer">
+        <div class="row">
             <div class="col-md-3">
-                <div class="reservation_calendar{{ $o.$r/* Lecture 29 */}}"></div>
+                <div class="reservation_calendar{{ $o.$r}}"></div>
             </div>
             <div class="col-md-9">
-                <div class="center-block loader loader_{{ $o.$r /* Lecture 29 */}}" style="display: none;"></div>
-                <div class="hidden_{{ $o.$r /* Lecture 29 */}}" style="display: none;">
+                <div class="center-block loader loader_{{ $o.$r }}" style="display: none;"></div>
+                <div class="hidden_{{ $o.$r }}" style="display: none;">
 
 
                     <div class="table-responsive">

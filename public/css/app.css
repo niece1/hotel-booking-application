@@ -67,6 +67,26 @@ nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li 
   margin: 80px auto;
 }
 
+/*Person page*/
+.person {
+  width: 100%;
+  height: auto;
+}
+.person .person-wrapper {
+  width: 75%;
+  margin: 80px auto;
+}
+
+/*Room page*/
+.room {
+  width: 100%;
+  height: auto;
+}
+.room .room-wrapper {
+  width: 75%;
+  margin: 80px auto;
+}
+
 /*Search area*/
 .search {
   width: 100%;
@@ -96,6 +116,16 @@ nav.navigation .navigation-wrapper .navigation-wrapper-right ul.authentified li 
   height: auto;
 }
 .object .object-wrapper {
+  width: 75%;
+  margin: 80px auto;
+}
+
+/*Login/Sign up page*/
+.login {
+  width: 100%;
+  height: auto;
+}
+.login .login-wrapper {
   width: 75%;
   margin: 80px auto;
 }
@@ -175,10 +205,6 @@ th {
   margin-bottom: 20px;
 }
 
-.top-buffer {
-  margin-top: 0;
-}
-
 .blue {
   color: #337ab7;
 }
@@ -227,14 +253,16 @@ th {
     top: 51px;
     bottom: 0;
     left: 0;
-    z-index: 1000;
     display: block;
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
     /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f5f5f5;
+    background-color: #e3f2fd;
     border-right: 1px solid #eee;
+  }
+  .sidebar a {
+    color: #ee2852;
   }
 }
 .reservationconfirmed a {

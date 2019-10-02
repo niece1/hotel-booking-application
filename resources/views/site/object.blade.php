@@ -61,11 +61,11 @@
                 <div class="col-md-3 col-sm-6">
 
                     <div class="thumbnail">
-                        <img class="img-responsive img-circle" src="{{ $room->shots->first()->path ?? $placeholder  }}" alt="...">
+                        <img class="img-responsive" src="{{ $room->shots->first()->path ?? $placeholder  }}" alt="...">
                         <div class="caption">
-                            <h3>Nr {{ $room->room_number}} </h3>
+                            <h4>Номер {{ $room->room_number}} </h4>
                             <p>{{ str_limit($room->description,70) }} </p>
-                            <p><a href="{{ route('room',['id'=>$room->id]) }}" class="btn btn-primary" role="button">Details</a><a href="{{ route('room',['id'=>$room->id]) }}#reservation" class="btn btn-success pull-right" role="button">Reservation</a></p>
+                            <p><a href="{{ route('room',['id'=>$room->id]) }}" class="btn btn-primary" role="button">Подробнее</a><a href="{{ route('room',['id'=>$room->id]) }}#reservation" class="btn btn-success pull-right" role="button">Зарезервировать</a></p>
                         </div>
                     </div>
                 </div>
