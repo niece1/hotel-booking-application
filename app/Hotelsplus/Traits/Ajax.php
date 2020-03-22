@@ -18,8 +18,8 @@ trait Ajax {
                     'day_out' => $reservation->day_out,
                     'FullName' => $reservation->user->FullName,
                     'userLink' => route('person', ['id' => $reservation->user->id]),
-                    'confirmResLink' => route('confirmReservation', ['id' => $reservation->id]), /* Lecture 33 */
-                    'deleteResLink' => route('deleteReservation', ['id' => $reservation->id]), /* Lecture 33 */
+                    'confirmResLink' => route('confirmReservation', ['id' => $reservation->id]), 
+                    'deleteResLink' => route('deleteReservation', ['id' => $reservation->id]), 
                     'status' => $reservation->status
         ]);
     }

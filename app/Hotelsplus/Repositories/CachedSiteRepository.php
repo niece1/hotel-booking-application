@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Hotelsplus\Repositories; /* Lecture 55 */
+namespace App\Hotelsplus\Repositories; 
 
 use App\Hotelsplus\Interfaces\SiteRepositoryInterface;
-use Illuminate\Support\Facades\Cache; /* Lecture 55 */
+use Illuminate\Support\Facades\Cache; 
 use Illuminate\Support\Facades\Redis;
 
 

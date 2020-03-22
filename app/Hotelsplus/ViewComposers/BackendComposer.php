@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Hotelsplus\ViewComposers; /* Lecture 49 */
+namespace App\Hotelsplus\ViewComposers; 
 
-use Illuminate\View\View; /* Lecture 49 */
-use App\Notification; /* Lecture 49 */
-use Illuminate\Support\Facades\Auth; /* Lecture 49 */
+use Illuminate\View\View; 
+use App\Notification; 
+use Illuminate\Support\Facades\Auth; 
 
 
- /* Lecture 49 */
 class BackendComposer
 {
 

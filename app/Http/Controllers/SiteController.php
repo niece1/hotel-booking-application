@@ -110,7 +110,6 @@ class SiteController extends Controller
 
     public function makeReservation($room_id, $city_id, Request $request)
     {
-
         $avaiable = $this->siteGateway->checkAvaiableReservations($room_id, $request);
 
         if (!$avaiable) {

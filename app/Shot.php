@@ -15,9 +15,7 @@ class Shot extends Model
     {
         return asset("storage/{$value}");
     }
-    
-    
-    /* Lecture 40 */
+
     public function getStoragepathAttribute()
     {
         return $this->original['path'];

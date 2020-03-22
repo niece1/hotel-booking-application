@@ -18,7 +18,6 @@ class AppServiceProvider extends ServiceProvider
         if (App::environment('local'))
         {
             
-            /* Lecture 13 */
             $this->app->bind(\App\Hotelsplus\Interfaces\SiteRepositoryInterface::class,function()
             {            
                 return new \App\Hotelsplus\Repositories\SiteRepository;

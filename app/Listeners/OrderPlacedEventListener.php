@@ -41,9 +41,9 @@ class OrderPlacedEventListener
         ]);
 
 
-        //   $memcache = new \Memcached(); /* Lecture 54 */
+        //   $memcache = new \Memcached(); 
 
-        //   $memcache->addServer('localhost', 11211) or die("Could not connect"); /* Lecture 54 */
+        //   $memcache->addServer('localhost', 11211) or die("Could not connect"); 
 
         //  $memcache->set('userid_' . $id. '_notification_timestamp',time());
     }

@@ -85,6 +85,6 @@ class RegisterController extends Controller
         $user->roles()->attach( Role::where('name','tourist')->first()->id ); 
         
         
-        return $user; /* Lecture 36 */
+        return $user;
     }
 }

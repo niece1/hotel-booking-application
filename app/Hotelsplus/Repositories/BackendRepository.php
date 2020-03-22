@@ -315,6 +315,6 @@ class BackendRepository implements BackendRepositoryInterface
 
     public function getNotifications()
     {
-        return Notification::where('user_id', Auth::user()->id)->where('status', 0)->get(); // for mobile
+        return Notification::where('user_id', Auth::user()->id)->where('status', 0)->get(); // mobile
     }
 }

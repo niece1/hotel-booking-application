@@ -22,33 +22,28 @@ class BackendController extends Controller
         $this->backendGateway = $backendGateway;
         $this->backendRepository = $backendRepository;
     }
-    
-    
-    /* Lecture 6 */
+       
     public function index(Request $request )
     {
         $objects = $this->backendGateway->getReservations($request); 
         return view('backend.index',['objects'=>$objects]);
     }
     
-    /* Lecture 6 */
     public function cities()
     {
         return view('backend.cities');
     }
     
-    public function myobjects(Request $request /* Lecture 46 */)
+    public function myobjects(Request $request)
     {
-        $objects = $this->backendRepository->getMyObjects($request); /* Lecture 46 */
-        //dd($objects); /* Lecture 46 */
+        $objects = $this->backendRepository->getMyObjects($request); 
+        //dd($objects); 
 
-        return view('backend.myobjects',['objects'=>$objects]/* Lecture 46 */);
+        return view('backend.myobjects',['objects'=>$objects]);
     }
     
-    /* Lecture 6 */
-    public function profile(Request $request /* Lecture 39 */)
+    public function profile(Request $request)
     {
-        /* Lecture 39 */
         if ($request->isMethod('post')) 
         {
 
@@ -56,9 +51,8 @@ class BackendController extends Controller
             
             if ($request->hasFile('userPicture'))
             {
-                $path = $request->file('userPicture')->store('users', 'public'); /* Lecture 40 */
+                $path = $request->file('userPicture')->store('users', 'public'); 
 
-                /* Lecture 40 */
                 if (count($user->shots) != 0)
                 {
                     $shot = $this->backendRepository->getShot($user->shots->first()->id);
@@ -80,12 +74,11 @@ class BackendController extends Controller
             return redirect()->back();
         }
 
-        return view('backend.profile',['user'=>Auth::user()]/* Lecture 39 */);
+        return view('backend.profile',['user'=>Auth::user()]);
     }
     
-    public function saveobject($id = null, Request $request /* Lecture 41 two args */)
+    public function saveobject($id = null, Request $request)
     {
-        /* Lecture 41 */
         if($request->isMethod('post'))
         {
             if($id)
@@ -102,8 +95,6 @@ class BackendController extends Controller
 
         }
 
-
-        /* Lecture 41 */
         if($id)
         return view('backend.saveobject',['object'=>$this->backendRepository->getObject($id),'cities'=>$this->backendRepository->getCities()]);
         else
@@ -140,58 +131,56 @@ class BackendController extends Controller
 
     public function deleteRoom($id)
     {
-        $room =  $this->backendRepository->getRoom($id); /* Lecture 48 */
+        $room =  $this->backendRepository->getRoom($id); 
         
-        $this->authorize('checkOwner', $room); /* Lecture 48 */
+        $this->authorize('checkOwner', $room); 
 
         $this->backendRepository->deleteRoom($room); 
 
         Cache::flush();
 
-        return redirect()->back(); /* Lecture 48 */
+        return redirect()->back();
     }
 
      public function confirmReservation($id)
     {
-        $reservation = $this->backendRepository->getReservation($id); /* Lecture 35 */
+        $reservation = $this->backendRepository->getReservation($id); 
 
-        $this->authorize('reservation', $reservation); /* Lecture 35 */
+        $this->authorize('reservation', $reservation); 
         
-        $this->backendRepository->confirmReservation($reservation); /* Lecture 35 */
+        $this->backendRepository->confirmReservation($reservation); 
         
-        $this->flashMsg ('success', __('Reservation has been confirmed'));  /* Lecture 35 */
+        $this->flashMsg ('success', __('Reservation has been confirmed'));  
         
 
-        if (!\Request::ajax()) /* Lecture 35 */
+        if (!\Request::ajax()) 
         return redirect()->back();
     }
 
-    
-    /* Lecture 33 */
     public function deleteReservation($id)
     {
-        $reservation = $this->backendRepository->getReservation($id); /* Lecture 35 */
+        $reservation = $this->backendRepository->getReservation($id); 
 
-        $this->authorize('reservation', $reservation); /* Lecture 35 */
+        $this->authorize('reservation', $reservation); 
 
-        $this->backendRepository->deleteReservation($reservation); /* Lecture 35 */
+        $this->backendRepository->deleteReservation($reservation); 
         
         $this->flashMsg ('success', __('Reservation has been deleted'));
 
         event( new ReservationConfirmedEvent($reservation) );
 
-        if (!\Request::ajax()) /* Lecture 35 */
+        if (!\Request::ajax()) 
         return redirect()->back();
     }
 
     public function deleteShot($id)
     {
 
-        $shot = $this->backendRepository->getShot($id); /* Lecture 40 */
+        $shot = $this->backendRepository->getShot($id); 
         
         $this->authorize('checkOwner', $shot);
         
-        $path = $this->backendRepository->deleteShot($shot); /* Lecture 40 */
+        $path = $this->backendRepository->deleteShot($shot); 
         
         Storage::disk('public')->delete($path); 
 
@@ -202,35 +191,32 @@ class BackendController extends Controller
 
     public function deleteArticle($id)
     {
-        $article =  $this->backendRepository->getArticle($id); /* Lecture 45 */
+        $article =  $this->backendRepository->getArticle($id); 
         
-        $this->authorize('checkOwner', $article); /* Lecture 45 */
+        $this->authorize('checkOwner', $article); 
         
         $this->backendRepository->deleteArticle($article);
 
         Cache::flush();
 
-        return redirect()->back(); /* Lecture 45 */ 
+        return redirect()->back(); 
     }
-    
-    
-    /* Lecture 44 */
-    public function saveArticle($object_id = null, Request $request /* Lecture 45 */)
+
+    public function saveArticle($object_id = null, Request $request)
     {
-        /* Lecture 45 */
         if(!$object_id) 
         {
            $this->flashMsg ('danger', __('First add an object')); 
            return redirect()->back();
         }
 
-        $this->authorize('checkOwner', $this->backendRepository->getObject($object_id)); /* Lecture 45 */
+        $this->authorize('checkOwner', $this->backendRepository->getObject($object_id)); 
 
         $this->backendGateway->saveArticle($object_id,$request); 
 
         Cache::flush();
 
-        return redirect()->back(); /* Lecture 45 */
+        return redirect()->back(); 
     }
 
     public function deleteObject($id)
@@ -247,13 +233,11 @@ class BackendController extends Controller
 
     public function getNotifications()
     {
-        return response()->json( $this->backendRepository->getNotifications() ); // for mobile
+        return response()->json( $this->backendRepository->getNotifications() ); // mobile
     }
-    
-    
-    /* Lecture 53 */
+
     public function setReadNotifications(Request $request)
     {
-        return  $this->backendRepository->setReadNotifications($request); // for mobile
+        return  $this->backendRepository->setReadNotifications($request); // mobile
     }
 }
