@@ -139,7 +139,6 @@
         </div>
     </div>
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -160,12 +159,10 @@
 
         });
 
-
         //to prevent scroll top when refreshing
         function scroll_value() {
             document.cookie = 'scroll_val' + '=' + $(window).scrollTop();
         }
-
 
         $(document).on('click', '.keep_pos', function(e) {
             scroll_value();

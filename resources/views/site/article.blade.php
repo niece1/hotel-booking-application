@@ -57,8 +57,6 @@
 
         @endauth
 
-
-
         <div class="collapse" id="collapseExample2">
             <div class="well mt-5" style="margin-top: 20px;">
 

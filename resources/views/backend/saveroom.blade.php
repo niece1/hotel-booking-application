@@ -49,7 +49,6 @@
 
             <div class="row">
 
-
                 @foreach( $chunked_shots as $shot )
 
                 <div class="col-md-3 col-sm-6">
@@ -66,13 +65,10 @@
 
             </div>
 
-
             @endforeach
-
 
         </div>
         @endif
-
 
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">

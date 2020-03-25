@@ -11,10 +11,6 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
 Route::get('/','SiteController@index')->name('home');
 Route::get('/object/{id}','SiteController@object')->name('object');
 Route::get('/adminHome','SiteController@adminHome')->name('adminHome');
@@ -45,7 +41,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
   Route::get('/cities','BackendController@cities')->name('cities.index');
   Route::match(['GET','POST'],trans('routes.saveobject').'/{id?}','BackendController@saveObject')->name('saveObject');
 
-  Route::get('/deleteArticle/{id}', 'BackendController@deleteArticle')->name('deleteArticle'); /* Lecture 44 */
+  Route::get('/deleteArticle/{id}', 'BackendController@deleteArticle')->name('deleteArticle'); 
   Route::post('/saveArticle/{id?}', 'BackendController@saveArticle')->name('saveArticle');
 
   Route::get('/ajaxGetReservationData', 'BackendController@ajaxGetReservationData');
@@ -55,7 +51,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
 
   Route::get(trans('routes.deleteobject').'/{id}', 'BackendController@deleteObject')->name('deleteObject');
 
-  Route::match(['GET','POST'],trans('routes.saveroom').'/{id?}', 'BackendController@saveRoom')->name('saveRoom'); /* Lecture 47 */  
+  Route::match(['GET','POST'],trans('routes.saveroom').'/{id?}', 'BackendController@saveRoom')->name('saveRoom');   
   Route::get(trans('routes.deleteroom').'/{id}', 'BackendController@deleteRoom')->name('deleteRoom');
   
   Route::resource('cities', 'CityController');  
@@ -65,7 +61,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
   Route::get('/ajaxSetShownNotifications', 'BackendController@ajaxSetShownNotifications');
 
   //for json mobile
-  Route::get('/getNotifications', 'BackendController@getNotifications'); /* Lecture 53 */
+  Route::get('/getNotifications', 'BackendController@getNotifications'); 
   Route::post('/setReadNotifications', 'BackendController@setReadNotifications');
     
 });

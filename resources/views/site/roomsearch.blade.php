@@ -3,7 +3,6 @@
 @section('content') 
 <section class="objects-list">
 
-
     <h1 class="text-center">Available rooms</h1>
 
     @foreach( $city->rooms->chunk(4) as $chunked_rooms ) 
@@ -11,8 +10,6 @@
     <div class="objects-list-wrapper">
 
             @foreach( $chunked_rooms as $room ) 
-
-                
 
             <div class="item-holder">
                         <img class="img-responsive" src="{{ $room->shots->first()->path ?? $placeholder  }}" alt="...">
@@ -23,9 +20,7 @@
                         </div>
                     </div>
                 
-
             @endforeach 
-
 
         </div>
 

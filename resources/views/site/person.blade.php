@@ -4,7 +4,6 @@
 <div class="person">
     <div class="person-wrapper">
 
-
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
@@ -16,7 +15,6 @@
                         <h2 style="color: #ee2852">{{ $user->FullName }}</h2>
 
                     </div>
-
 
                     <div class="col-sm-12">
                         <button class="btn btn-success btn-block" style="margin: 10px 0;"><span class="fa fa-plus-circle"></span> {{ $user->objects->count() }} liked objects </button>
@@ -63,7 +61,6 @@
                 </div>
             </div>
         </div>
-
 
     </div>
 </div>

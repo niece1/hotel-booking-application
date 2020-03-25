@@ -35,7 +35,6 @@
 
                 <p><a href="#">About</a><a href="#">FAQ</a></p>
 
-
             </div>
         </div>
     </div>
@@ -69,7 +68,6 @@
                             </ul>
                         </div>
                     </li>
-
 
                 </ul>
                 @endauth
@@ -106,7 +104,6 @@
                 <select name="room_size" class="form-control">
                     <option>Room size</option>
 
-
                     @for($i=1;$i<=5;$i++) @if( old('room_size')==$i ) <option selected value="{{$i}}">{{$i}}</option>
                         @else
                         <option value="{{$i}}">{{$i}}</option>
@@ -119,12 +116,9 @@
             @csrf
         </form>
 
-
     </section>
 
-
     @yield('content')
-
 
     <div class="pre-footer">
 
@@ -149,9 +143,7 @@
                 <p><a href="{{ route('register') }}">Зарегистрироваться</a></p>
             </div>
 
-
         </div>
-
 
     </div>
 

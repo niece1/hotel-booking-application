@@ -20,7 +20,6 @@
 
         @endforeach
 
-
         <section>
 
             <ul class="list-group">
@@ -68,12 +67,10 @@
                 </div>
             </div>
 
-
         </section>
     </div>
 </div>
 @endsection
-
 
 @push('scripts')
 
@@ -147,13 +144,10 @@
                             return [true, ''];
                     }
 
-
                 });
             });
 
-
         }
-
 
     });
 </script>

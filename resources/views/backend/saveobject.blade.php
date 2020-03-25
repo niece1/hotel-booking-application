@@ -16,7 +16,6 @@
 
                 <select name="city" class="form-control" id="city">
 
-
                     @foreach($cities as $city)
                     @if( ($object ?? false) && $object->city->id == $city->id )
                     <option selected value="{{ $city->id }}">{{ $city->name }}</option>
@@ -67,12 +66,9 @@
 
             @foreach( $object->shots->chunk(4) as $chunked_shots )
 
-
             <div class="row">
 
-
                 @foreach( $chunked_shots as $shot )
-
 
                 <div class="col-md-3 col-sm-6">
                     <div class="thumbnail">
@@ -86,12 +82,9 @@
 
                 @endforeach
 
-
             </div>
 
-
             @endforeach
-
 
         </div>
 
@@ -104,7 +97,6 @@
                     {{ $article->title  }} <a href="{{ route('deleteArticle',['id'=>$article->id]) }}">удалить</a>
                 </li>
                 @endforeach
-
 
             </ul>
         </div>

@@ -41,7 +41,6 @@
                     @endforeach
                 </ul>
 
-
             </div>
             <div class="tab-pane fade" id="adress">
                 <p style="margin-top: 10px">{{ $object->address->street }} {{ $object->address->number }} </p>
